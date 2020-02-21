@@ -11,15 +11,9 @@ const MovieCards = (props) => {
         <div className='col s3'>
             <div className="card">
                 <Link to={link}>
-                <button type="submit" className="waves-effect waves-light">
-                <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator"
-                    src={img}
-                    onClick={props.clickHandler} 
-                    id={props.value}
-                    name={props.name}/>
-                </div>
-                </button>
+                    <div className="card-image waves-effect waves-block waves-light">
+                        <img className="activator"src={img}/>
+                    </div>
                 </Link>
             </div>
         </div>

@@ -11,7 +11,10 @@ const MovieHome = (props) => {
         <div className="card">
           <div className="card-image">
             <img src={img}/>
-            <p className="card-title">hola</p>
+            <div className="card-title">
+              <h4>{props.movie.original_title}</h4>
+              <p>{props.movie.overview}</p>
+            </div>
           </div>
         </div>
       </div>

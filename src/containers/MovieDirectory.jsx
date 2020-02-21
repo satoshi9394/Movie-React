@@ -8,16 +8,12 @@ import MovieCards from "../components/MovieCards";
 import configServices from '../utils/config';
 import Btn from "../components/Btn";
 
-
-/* https://api.themoviedb.org/3/movie/popular?api_key=0d59c137d4b1775154cc094577fbe290&language=en-US&page=1
-https://api.themoviedb.org/3//movie/popular?api_key=0d59c137d4b1775154cc094577fbe290&language=en-US&page=1 */
-
 class MovieDirectory extends Component {
     state = {
         movieData:[],
         load: false,
-        pages: 1,
         id: 0,
+        pages: 1,
         newMovieData:[]
     }
 
@@ -47,33 +43,19 @@ class MovieDirectory extends Component {
             () => (this.state.pages= this.state.pages + 1)
         )
     }
-    addMovieMain= (e) => {
-        let value = e.target.id;
-        let name = e.target.name;
-        console.log(value)
-        console.log(name)
-        this.setState(()=>({
-            id: value,
-            idMovie: name
-        }))
 
-    }
 
     render() {
-        //let movieData = this.state.movieData.results; 
         let card;
         let mainCard
         if (this.state.load === true) {
             card = this.state.movieData.map((movie, idx) => 
-            <MovieCards movie={movie} value={idx} name={movie.id} key={idx} clickHandler={this.addMovieMain}/> );
+            <MovieCards movie={movie} name={movie.id} key={idx}/> );
             mainCard = <MovieHome movie={this.state.movieData[this.state.id]}/>
         
-        }else{
-            console.log('aun no llega la info')
         }
 
 
-        console.log('hola')
         return(
             <div className='row'>
                 {mainCard}

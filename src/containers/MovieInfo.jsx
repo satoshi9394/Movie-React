@@ -1,17 +1,9 @@
 import React, { Component } from "react"
-import Link from 'react-router-dom'
-
 //Components
-import MovieMain from "../components/MovieMain";
-import Btn from "../components/Btn";
-
+import MovieMain from '../components/MovieMain';
+import ExtraInfo from '../components/ExtraInfo';
 //Config
 import configServices from '../utils/config';
-
-
-
-/* https://api.themoviedb.org/3/movie/popular?api_key=0d59c137d4b1775154cc094577fbe290&language=en-US&page=1
-https://api.themoviedb.org/3//movie/popular?api_key=0d59c137d4b1775154cc094577fbe290&language=en-US&page=1 */
 
 class MovieDirectory extends Component {
     
@@ -39,21 +31,31 @@ class MovieDirectory extends Component {
     }
 
     render() {
-        //let card;
-        console.log(this.state.movieData)
         let mainCard;
-/*         if (this.state.load === true) {
-            card = this.state.movieData.map((movie, idx) => 
-            <MovieMain movie={movie} key={idx}/> );        
-        }else{
-            console.log('aun no llega la info')
-        } */
-
-
-        console.log(this.state.movieData)
+        let time;
+        let budget;
+        let revenue
+        if (this.state.load === true) {
+            mainCard = <MovieMain movie={this.state.movieData}/>   
+            time = <ExtraInfo icon='timer' movie={this.state.movieData} type='time' title='Runnig Time:'/>
+            budget = <ExtraInfo icon='monetization_on' movie={this.state.movieData} type='budget' title='Budget'/>
+            revenue = <ExtraInfo icon='receipt' movie={this.state.movieData} type='revenue' title='revenue'/>
+        }
+        
         return(
             <div className='row'>
-                <MovieMain movie={this.state.movieData}/>
+                <div className="col s12">
+                    {mainCard}
+                </div>
+                <div className="col s4">
+                    {time}
+                </div>
+                <div className="col s4">
+                    {budget}
+                </div>
+                <div className="col s4">
+                    {revenue}    
+                </div>                
             </div>
         );
     }
