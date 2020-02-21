@@ -28,7 +28,7 @@ class MovieDirectory extends Component {
             .then(data => {
                 this.setState({
                     movieData: data.results,
-                    load: true
+                    load: true,
                 });
             });
     }
@@ -54,7 +54,9 @@ class MovieDirectory extends Component {
         console.log(name)
         this.setState(()=>({
             id: value,
+            idMovie: name
         }))
+
     }
 
     render() {

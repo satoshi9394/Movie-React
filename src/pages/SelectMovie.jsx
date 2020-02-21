@@ -1,12 +1,13 @@
 import React from 'react'
 
+import MovieInfo from '../containers/MovieInfo'
 
 
-const DirectoryPages = () => {
+const DirectoryPages = (props) => {
+    const { params } = props.match;
+    console.log(`${params.id}`)
     return(
-        <div>
-            hola selector
-        </div>
+        <MovieInfo id={params.id}/>
     )
 }
 

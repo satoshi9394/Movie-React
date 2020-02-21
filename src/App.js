@@ -11,7 +11,7 @@ const App = () => {
       <div className="container">
         <Switch>
           <Route exact path="/" component={MainMovie}/>
-          <Route path="/select" component={SelectMovie}/>
+          <Route path="/movie/:id" component={SelectMovie}/>
         </Switch>
       </div>
     </Router>
