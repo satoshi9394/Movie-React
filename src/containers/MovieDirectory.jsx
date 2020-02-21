@@ -5,7 +5,8 @@ import MovieHome from "../components/MovieHome";
 import MovieCards from "../components/MovieCards";
 
 //Config
-import apiData from '../utils/movieData'
+import configServices from '../utils/config';
+import Btn from "../components/Btn";
 
 
 /* https://api.themoviedb.org/3/movie/popular?api_key=0d59c137d4b1775154cc094577fbe290&language=en-US&page=1
@@ -13,31 +14,57 @@ https://api.themoviedb.org/3//movie/popular?api_key=0d59c137d4b1775154cc094577fb
 
 class MovieDirectory extends Component {
     state = {
-        movieData:{},
+        movieData:[],
         load: false,
+        pages: 1,
+        id: 0,
+        newMovieData:[]
     }
 
     componentDidMount() {
-        
-        apiData()
+        const url = `${configServices.apiUrl}movie/popular?api_key=${configServices.apiKey}&language=en-US&page=1`
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 this.setState({
-                    movieData: data,
+                    movieData: data.results,
                     load: true
                 });
             });
     }
 
+    handleFormSubmmit = (e) =>{
+        e.preventDefault();
+        const url = `${configServices.apiUrl}movie/popular?api_key=${configServices.apiKey}&language=en-US&page=${this.state.pages + 1}`
+        fetch(url)
+            .then(response => response.json())
+            .then(data =>{
+                this.setState({
+                    newMovieData: data.results,
+                });
+            });
+        this.setState(
+            () => (this.state.pages= this.state.pages + 1)
+        )
+    }
+    addMovieMain= (e) => {
+        let value = e.target.id;
+        let name = e.target.name;
+        console.log(value)
+        console.log(name)
+        this.setState(()=>({
+            id: value,
+        }))
+    }
+
     render() {
-        let movieData = this.state.movieData.results; 
-        console.log(movieData)
+        //let movieData = this.state.movieData.results; 
         let card;
         let mainCard
         if (this.state.load === true) {
-            card = movieData.map((movie, idx) => 
-            <MovieCards movie={movie}  key={idx}/> );
-            mainCard = <MovieHome movie={movieData[0]}/>
+            card = this.state.movieData.map((movie, idx) => 
+            <MovieCards movie={movie} value={idx} name={movie.id} key={idx} clickHandler={this.addMovieMain}/> );
+            mainCard = <MovieHome movie={this.state.movieData[this.state.id]}/>
         
         }else{
             console.log('aun no llega la info')
@@ -49,6 +76,7 @@ class MovieDirectory extends Component {
             <div className='row'>
                 {mainCard}
                 {card}
+                <Btn clickHandler={this.handleFormSubmmit} type="Mostrar mas peliculas" icon="add"/>
             </div>
         );
     }
