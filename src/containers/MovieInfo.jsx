@@ -12,14 +12,15 @@ class MovieDirectory extends Component {
         this.state = {
         movieData:[],
         load: false,
-        pages: 1,
         id: this.props.id,
-        newMovieData:[]
+        moviePeople:[],
+        directors:[{}]
         }
     }
 
     componentDidMount() {
-        const url = `${configServices.apiUrl}movie/${this.state.id}?api_key=${configServices.apiKey}&language=en-US&page=1`
+        const url = `${configServices.apiUrl}movie/${this.state.id}?api_key=${configServices.apiKey}&language=en-US`
+        const urlPeople =`${configServices.apiUrl}movie/${this.state.id}/credits?api_key=${configServices.apiKey}&language=en-US`
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -28,6 +29,15 @@ class MovieDirectory extends Component {
                     load: true
                 });
             });
+        fetch(urlPeople)
+        .then(response => response.json())
+        .then(data => {
+            this.setState({moviePeople: data.cast,});
+            const directors = data.crew.filter(
+                member => member.job === "Director"
+              );
+            this.setState({directors: directors,});
+        });
     }
 
     render() {
@@ -35,8 +45,8 @@ class MovieDirectory extends Component {
         let time;
         let budget;
         let revenue
-        if (this.state.load === true) {
-            mainCard = <MovieMain movie={this.state.movieData}/>   
+        if (this.state.load === true) {       
+            mainCard = <MovieMain movie={this.state.movieData} directors={this.state.directors}/>   
             time = <ExtraInfo icon='timer' movie={this.state.movieData} type='time' title='Runnig Time:'/>
             budget = <ExtraInfo icon='monetization_on' movie={this.state.movieData} type='budget' title='Budget'/>
             revenue = <ExtraInfo icon='receipt' movie={this.state.movieData} type='revenue' title='revenue'/>

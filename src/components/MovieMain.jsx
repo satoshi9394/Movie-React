@@ -13,7 +13,6 @@ const MovieHome = (props) => {
     let genereTree = props.movie.genres[2].name
 
   
-
     return(
         <div className="col s12">
         <div className="card horizontal teal darken-3">
@@ -36,6 +35,7 @@ const MovieHome = (props) => {
                     value={props.movie.vote_average * 10}
                   /> <p> {props.movie.vote_average} </p>
                   <h5>Directors</h5>
+                  <p>{props.directors[0].name}</p>
                 </div>
             </div>
         </div>
