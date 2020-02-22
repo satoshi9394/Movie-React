@@ -8,10 +8,10 @@ import configServices from '../utils/config';
 
 const MovieHome = (props) => {
     let img = `${configServices.ImgBaseUrl}w500${props.movie.poster_path}`
-    
-    let genereUno = props.movie.genres[0].name
-    let genereTwo = props.movie.genres[1].name
-    let genereTree = props.movie.genres[2].name
+    let genereUno = ( typeof props.movie.genres === 'array' ) ? props.movie.genres[0].name : 0;
+    let genereTwo = ( typeof props.movie.genres === 'array' ) ? props.movie.genres[1].name : 0;
+    let genereTree = ( typeof props.movie.genres === 'array' ) ? props.movie.genres[2].name : 0;
+
 
   
     return(
