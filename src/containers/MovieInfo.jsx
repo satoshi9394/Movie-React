@@ -2,8 +2,11 @@ import React, { Component } from "react"
 //Components
 import MovieMain from '../components/MovieMain';
 import ExtraInfo from '../components/ExtraInfo';
+import CardActors from "../components/CardActors";
+import Btn from '../components/Btn'
 //Config
 import configServices from '../utils/config';
+
 
 class MovieDirectory extends Component {
     
@@ -14,7 +17,8 @@ class MovieDirectory extends Component {
         load: false,
         id: this.props.id,
         moviePeople:[],
-        directors:[{}]
+        directors:[{}],
+        addActors: false,
         }
     }
 
@@ -40,16 +44,29 @@ class MovieDirectory extends Component {
         });
     }
 
+    AddActors =(e) =>{
+        e.preventDefault();
+        this.setState({addActors: true})
+    }
+
     render() {
         let mainCard;
         let time;
         let budget;
-        let revenue
+        let revenue;
+        let cardActors;
         if (this.state.load === true) {       
             mainCard = <MovieMain movie={this.state.movieData} directors={this.state.directors}/>   
             time = <ExtraInfo icon='timer' movie={this.state.movieData} type='time' title='Runnig Time:'/>
             budget = <ExtraInfo icon='monetization_on' movie={this.state.movieData} type='budget' title='Budget'/>
             revenue = <ExtraInfo icon='receipt' movie={this.state.movieData} type='revenue' title='revenue'/>
+            if(this.state.addActors === true){
+                cardActors = this.state.moviePeople.map((actor, idx) => 
+                <CardActors actor={actor} key={idx} /> );
+            }else{
+
+            }
+
         }
         
         return(
@@ -65,6 +82,12 @@ class MovieDirectory extends Component {
                 </div>
                 <div className="col s4">
                     {revenue}    
+                </div>
+                <div className="col s12">
+                    <Btn clickHandler={this.AddActors} icon='add' type='Desea ver los Actores da click aqui'/>
+                </div>
+                <div className="col s12">
+                    {cardActors}
                 </div>                
             </div>
         );
