@@ -8,9 +8,10 @@ import configServices from '../utils/config';
 
 const MovieHome = (props) => {
     let img = `${configServices.ImgBaseUrl}w500${props.movie.poster_path}`
-    let genereUno = ( typeof props.movie.genres === 'array' ) ? props.movie.genres[0].name : 0;
-    let genereTwo = ( typeof props.movie.genres === 'array' ) ? props.movie.genres[1].name : 0;
-    let genereTree = ( typeof props.movie.genres === 'array' ) ? props.movie.genres[2].name : 0;
+    console.log(typeof props.movie.genres)
+    let genereUno = ( typeof props.movie.genres[0] == 'object' ) ? `* ${props.movie.genres[0].name}` : '';
+    let genereTwo = ( typeof props.movie.genres[1] === 'object' ) ? `* ${props.movie.genres[1].name}` : '';
+    let genereTree = ( typeof props.movie.genres[2] === 'object' ) ? `* ${props.movie.genres[2].name}` : '';
 
 
   
@@ -26,7 +27,7 @@ const MovieHome = (props) => {
                   <h5>About:</h5>
                   <p>{props.movie.overview}</p>
                   <h5>Generes</h5>
-                  <p>*{genereUno} *{genereTwo} *{genereTree}</p>
+                  <p>{genereUno} {genereTwo} {genereTree}</p>
                   <meter
                     min="0"
                     max="100"
