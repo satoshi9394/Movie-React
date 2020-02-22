@@ -7,6 +7,7 @@ import SelectMovie from './pages/SelectMovie'
 
 //components
 import NavBar from './components/NavBar'
+import NotFound from './components/NotFound'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={MainMovie}/>
           <Route path="/movie/:id" component={SelectMovie}/>
+          <Route component={NotFound}/>
         </Switch>
       </div>
     </Router>

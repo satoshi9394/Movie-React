@@ -8,6 +8,7 @@ import configServices from '../utils/config';
 
 const MovieHome = (props) => {
     let img = `${configServices.ImgBaseUrl}w500${props.movie.poster_path}`
+    
     let genereUno = props.movie.genres[0].name
     let genereTwo = props.movie.genres[1].name
     let genereTree = props.movie.genres[2].name

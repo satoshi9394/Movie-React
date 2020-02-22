@@ -48,12 +48,13 @@ class MovieDirectory extends Component {
 
     render() {
         let card;
-        let mainCard
+        let mainCard;
+        let btn;
         if (this.state.load === true) {
             card = this.state.movieData.map((movie, idx) => 
             <MovieCards movie={movie} name={movie.id} key={idx}/> );
             mainCard = <MovieHome movie={this.state.movieData[this.state.id]}/>
-        
+            btn = <Btn clickHandler={this.handleFormSubmmit} type="Mostrar mas peliculas" icon="add_to_queue"/>
         }
 
 
@@ -61,7 +62,10 @@ class MovieDirectory extends Component {
             <div className='row'>
                 {mainCard}
                 {card}
-                <Btn clickHandler={this.handleFormSubmmit} type="Mostrar mas peliculas" icon="add"/>
+                <div className="col s12">
+                {btn}
+                </div>
+
             </div>
         );
     }
