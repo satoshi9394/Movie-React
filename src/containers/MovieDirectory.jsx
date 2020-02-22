@@ -36,9 +36,10 @@ class MovieDirectory extends Component {
             .then(response => response.json())
             .then(data =>{
                 this.setState({
-                    newMovieData: data.results,
+                    movieData: [...this.state.movieData,
+                    ...data.results]
                 });
-            });
+            });  
         this.setState(
             () => (this.state.pages= this.state.pages + 1)
         )
