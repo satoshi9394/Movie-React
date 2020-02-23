@@ -16,8 +16,9 @@ code {
 }
 
 #LogNav{
-  width: 55%;
-  height: 90%;
+  width: 70%;
+  height: 15vh;
+  padding: 1rem;
 }
 
 #cardActors{
