@@ -5,7 +5,8 @@ import React from 'react';
 import {calcTime} from '../utils/formatTime'
 import {convertMoney} from '../utils/formatCost'
 
-
+//styles
+import '../styles/ExtraInfo.css'
 
 
 const ExtraInfo = (props) => {
@@ -26,13 +27,13 @@ const ExtraInfo = (props) => {
     return(
         <div className="col s12">
         <div className="card horizontal teal darken-4 cyan-text text-accent-2 ">
-          <div className="card-image">
-            <i className="medium material-icons">{props.icon}</i>
-          </div>
-            <div className="card-stacked">
-                <div className="card-content">
-                    <h6>{props.title} {type}</h6>
-                </div>
+            <div className="col">
+            <div className="card-image">
+                <i className="medium material-icons">{props.icon}</i>
+            </div>
+            </div>
+            <div className="col">
+                <h6 id='extraInfo'>{props.title} {type}</h6>
             </div>
         </div>
       </div>
